@@ -25,3 +25,29 @@ export const SubstractActionAnswer = (left: number, right: number, operator: str
                 })
         }
 }
+
+export const MultiplyActionAnswer = (left: number, right: number, operator: string) => (dispatch: Dispatch, getState: any):void => {
+        const {
+                Answer: {answers}
+        } = getState();
+        let answer: number = left * right;
+        if (operator === '*') {
+                dispatch({
+                        type: 'MULTIPLY',
+                        payload: [{id: answer, answer}, ...answers]
+                })
+        }
+}
+
+export const DivisionActionAnswer = (left: number, right: number, operator: string) => (dispatch: Dispatch, getState: any):void => {
+        const {
+                Answer: {answers}
+        } = getState();
+        let answer: number = left / right;
+        if (operator === '/') {
+                dispatch({
+                        type: 'DIVISION',
+                        payload: [{id: answer, answer}, ...answers]
+                })
+        }
+}

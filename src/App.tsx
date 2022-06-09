@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IncrementActionAnswer, SubstractActionAnswer } from './actions/AnswerActions';
+import { DivisionActionAnswer, IncrementActionAnswer, MultiplyActionAnswer, SubstractActionAnswer } from './actions/AnswerActions';
 import './App.css';
 
 const App = () =>{
@@ -17,6 +17,8 @@ const App = () =>{
   const handleClick = (t: any) => {
     dispatch(IncrementActionAnswer(first, second, operator) as any);
     dispatch(SubstractActionAnswer(first, second, operator) as any);
+    dispatch(MultiplyActionAnswer(first, second, operator) as any);
+    dispatch(DivisionActionAnswer(first, second, operator) as any);
   }
 
   return (
@@ -40,7 +42,8 @@ const App = () =>{
             placeholder='type operator' type="text" 
             onChange={(e) => setOperator(e.target.value)}
             />
-          <button style={{color: 'white', padding:10, backgroundColor: '#61dafb', fontSize: 20, cursor: 'pointer'}} onClick={handleClick}>
+          <button style={{color: 'white', padding:10, backgroundColor: '#61dafb', fontSize: 20, cursor: 'pointer'}} 
+            onClick={handleClick}>
             Calculate
           </button>
         </div>
