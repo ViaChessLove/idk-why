@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { IncrementActionAnswer, SubstractActionAnswer } from './actions/AnswerActions';
 import './App.css';
 
 const App = () =>{
@@ -7,9 +8,16 @@ const App = () =>{
   const [second, setSecond] = useState<number>(0);
   const [operator, setOperator] = useState<string>('');
 
+  const dispatch = useDispatch();
+
   const Answer = useSelector((state: any) => state.Answer);
 
   const {answers} = Answer;
+
+  const handleClick = (t: any) => {
+    dispatch(IncrementActionAnswer(first, second, operator) as any);
+    dispatch(SubstractActionAnswer(first, second, operator) as any);
+  }
 
   return (
     <div className="App">
@@ -32,17 +40,18 @@ const App = () =>{
             placeholder='type operator' type="text" 
             onChange={(e) => setOperator(e.target.value)}
             />
-          <button style={{color: 'white', padding:10, backgroundColor: '#61dafb', fontSize: 20, cursor: 'pointer'}}>
+          <button style={{color: 'white', padding:10, backgroundColor: '#61dafb', fontSize: 20, cursor: 'pointer'}} onClick={handleClick}>
             Calculate
           </button>
         </div>
-        {first}
-        {second}
-        {operator}
         <ul>
-          <li>
-            = 10
-          </li>
+          {
+            answers && answers.map((t: any) => (
+              <li key={t.answer}>
+                = {t.answer}
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
